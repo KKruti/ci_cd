@@ -35,7 +35,7 @@ jobs:
 
         # Restore Nuget
       - name: Restore NuGet Packages
-         run: nuget restore CICD.sln
+        run: nuget restore CICD.sln
 
       # Runs a single command using the runners shell
       - name: build project

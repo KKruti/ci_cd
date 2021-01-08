@@ -34,8 +34,8 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.2
      
      # Restore Nuget
-    - name: Restore NuGet Packages
-      run: nuget restore CICD.sln
+      - name: Restore NuGet Packages
+        run: nuget restore CICD.sln
 
       # Runs a single command using the runners shell
       - name: build project
