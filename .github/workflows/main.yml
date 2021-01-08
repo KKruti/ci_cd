@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -37,7 +37,7 @@ jobs:
       - name: Upload WebApp1 Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: CI_CDArtifact
+          name: MasterArtifact
           path: /home/runner/work/ci_cd/ci_cd/bin/Debug/netcoreapp3.1/publish/   
     
    
