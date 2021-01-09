@@ -50,6 +50,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: DevArtifact
-          path: /home/runner/work/ci_cd/ci_cd/bin/Debug/netcoreapp3.1/publish/   
+          path: D:\a\ci_cd\ci_cd\bin\Debug\netcoreapp3.1\publish\   
     
    
