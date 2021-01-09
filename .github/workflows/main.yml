@@ -29,6 +29,13 @@ jobs:
       #  with:
       #    dotnet-version: 3.1
 
+      - uses: actions/cache@v2
+        with:
+             path: ${{ github.workspace }}/.nuget/packages
+             key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+             restore-keys: |
+                       ${{ runner.os }}-nuget-
+
         # Setup Nuget
       # - name: Setup NuGet
       #  uses: NuGet/setup-nuget@v1.0.2
