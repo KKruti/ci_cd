@@ -52,10 +52,22 @@ jobs:
         run: dotnet publish
           
       # Artifact 
-      - name: Upload WebApp1 Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: MasterArtifact
-          path: D:\a\ci_cd\ci_cd\bin\Debug\netcoreapp3.1\publish\   
+     # - name: Upload WebApp1 Build Artifact
+     #   uses: actions/upload-artifact@v2
+     #   with:
+     #     name: MasterArtifact
+      #    path: D:\a\ci_cd\ci_cd\bin\Debug\netcoreapp3.1\publish\   
+          
+      - name: Stop Application Pool
+        shell: cmd
+        run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -allowUntrusted -source:recycleApp -dest:recycleApp="${{secrets.RECYCLE_APP_NAME }}",recycleMode="StopAppPool",computerName="${{secrets.IIS_SERVER_COMPUTER_NAME }}msdeploy.axd?site=${{secrets.IIS_WEBSITE_NAME }}",username="${{secrets.IIS_SERVER_USERNAME }}",password="${{secrets.IIS_SERVER_PASSWORD }}",AuthType="Basic"'
+      - name: Deploy Application to EC2-IIS
+        shell: cmd
+        run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -useCheckSum -allowUntrusted -source:contentPath="D:\a\ci_cd\ci_cd\bin\Debug\netcoreapp3.1\publish\" -dest:contentPath="${{secrets.WEBSITE_CONTENT_PATH }}",computerName="${{secrets.IIS_SERVER_COMPUTER_NAME }}/msdeploy.axd?site=${{secrets.IIS_WEBSITE_NAME }}",username="${{secrets.IIS_SERVER_USERNAME }}",password="${{secrets.IIS_SERVER_PASSWORD }}",authtype="Basic"'
+      - name: Start Application Pool
+        shell: cmd
+        run: '"C:/Program Files (x86)/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -allowUntrusted -source:recycleApp -dest:recycleApp="${{secrets.RECYCLE_APP_NAME }}",recycleMode="StartAppPool",computerName="${{secrets.IIS_SERVER_COMPUTER_NAME }}/msdeploy.axd?site=${{secrets.IIS_WEBSITE_NAME }}",username="${{secrets.IIS_SERVER_USERNAME }}",password="${{secrets.IIS_SERVER_PASSWORD }}",AuthType="Basic"'
+    
+   
     
    
